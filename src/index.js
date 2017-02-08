@@ -13,7 +13,7 @@ const preloadedState = {
   playlist: []
 }
 
-let socket = io("http://localhost:3000")
+let socket = io(window.location.href)
 let socketIoMiddleware = createSocketIoMiddleware(socket, "server/")
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
