@@ -1,5 +1,10 @@
 export default function reducer(state = {}, action) {
   switch (action.type) {
+    case "JOIN_TEAM":
+      return {
+        ...state,
+        team: action.team
+      }
     case "ADD_VIDEO":
       if (state.current === "") {
         return {

@@ -2,6 +2,14 @@ const parseYoutubeUrl = (url) => {
   return url.split("?")[1].split("&").filter(param => param[0] === "v")[0].split("=")[1]
 }
 
+export function joinTeam(team, pin) {
+  return {
+    type: "server/JOIN_TEAM",
+    team: team,
+    pin: pin
+  }
+}
+
 export function addVideo(video) {
   return {
     type: "ADD_VIDEO",
