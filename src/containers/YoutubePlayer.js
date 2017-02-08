@@ -3,8 +3,7 @@ import { consumeVideo } from '../actions'
 import Youtube from 'react-youtube'
 
 const mapStateToProps = (state) => ({
-  videoId: state.currentVideo,
-  playlist: state.playlist,
+  videoId: state.current,
   opts: {
     playerVars: {
       autoplay: 1
@@ -12,8 +11,8 @@ const mapStateToProps = (state) => ({
   }
 })
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  onEnd: () => dispatch(consumeVideo(ownProps.playlist))
+const mapDispatchToProps = (dispatch) => ({
+  onEnd: () => dispatch(consumeVideo())
 })
 
 const YoutubePlayer = connect(mapStateToProps, mapDispatchToProps)(Youtube)

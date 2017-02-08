@@ -1,40 +1,29 @@
-import { combineReducers } from 'redux'
-
-function nextVideo(nextVideo = "", action) {
-  switch (action.type) {
-    case "UPDATE_NEXT_VIDEO":
-      console.log("updated next video")
-      return action.video
-    default:
-      return nextVideo
-  }
-}
-
-function currentVideo(currentVideo = "", action) {
-  switch (action.type) {
-    case "SET_CURRENT_VIDEO":
-      return action.video
-    default:
-      return currentVideo
-  }
-}
-
-function playlist(playlist = [], action) {
+export default function reducer(state = {}, action) {
   switch (action.type) {
     case "ADD_VIDEO":
-      console.log("added video")
-      return [action.video, ...playlist]
+      if (state.current === "") {
+        return {
+          ...state,
+          current: action.video
+        }
+      }
+      else {
+        return {
+          ...state,
+          playlist: [action.video, ...state.playlist]
+        }
+      }
     case "DELETE_VIDEO":
-      return playlist.filter(video => video !== action.video)
+      return {
+        ...state,
+        playlist: state.playlist.filter(video => video !== action.video)
+      }
+    case "PLAY_VIDEO":
+      return {
+        ...state,
+        current: action.video
+      }
     default:
-      return playlist
+      return state
   }
 }
-
-const reducer = combineReducers({
-  nextVideo,
-  playlist,
-  currentVideo
-})
-
-export default reducer
